@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 import pickle
 
-from preprocessing import process_data
+from utilities import process_data
 
 def main(time=360):
 
@@ -25,7 +25,6 @@ def main(time=360):
 	    resampling_strategy='cv',
 	    resampling_strategy_arguments={'folds': 5},
 	)
-
 
 	classifier.fit(df_train.copy(), label.copy())
 
