@@ -1,0 +1,30 @@
+#+title: Codenation Challenge
+
+[[./img/enem.png]]
+
+* Metas [1/7]
+- [X] Rodar com o autosklearn
+- [ ] Usar apenas características selecionadas pelo KBest
+- [ ] Analisar individuos de alta precisão e baixa precisão no acerto com o Lime
+- [ ] Analisar o gráfico da regressão
+- [ ] Gerar novas características
+- [ ] Verificar se é possível usar o xgboost como regressor
+- [ ] Estimar parametros para os regressores mais relevantes
+- [ ] Normalizar os dados antes de enviar para o regressor
+
+* Criação de novas características
+** Análises estatísticas que podem ser relevantes [44%]
+- [ ] Skew
+- [X] Kurtosis
+- [X] Quartile
+- [X] Median
+- [X] Mean
+- [ ] Max
+- [ ] Min
+- [ ] Count
+- [ ] Mode
+
+* Regressores mais relevantes
+1. Random Forest
+2. ??
+3. ??
