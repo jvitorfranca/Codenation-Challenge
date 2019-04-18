@@ -6,7 +6,7 @@
     1.  [Análises estatísticas que podem ser relevantes <code>[44%]</code>](#org69096b0)
 3.  [Regressores mais relevantes](#org959ef3c)
 
-![img](.org/img/enem.png)
+![img](org/img/enem.png)
 
 <a id="org2f4888d"></a>
 
