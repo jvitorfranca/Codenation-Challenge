@@ -59,9 +59,9 @@ def process_data(df_train, df_test, df_answer):
 
 	# One_hot_enconding em variáveis categóricas
 
-	df_train = pd.get_dummies(df_train, prefix='Q', columns=['Q001', 'Q002', 'Q006', 'Q024', 'Q025', 'Q026', 'Q047'])
+	df_train = pd.get_dummies(df_train, prefix=['Q001', 'Q002', 'Q006', 'Q024', 'Q025', 'Q026', 'Q047'], columns=['Q001', 'Q002', 'Q006', 'Q024', 'Q025', 'Q026', 'Q047'])
 
-	df_test = pd.get_dummies(df_test, prefix='Q', columns=['Q001', 'Q002', 'Q006', 'Q024', 'Q025', 'Q026', 'Q047'])
+	df_test = pd.get_dummies(df_test, prefix=['Q001', 'Q002', 'Q006', 'Q024', 'Q025', 'Q026', 'Q047'], columns=['Q001', 'Q002', 'Q006', 'Q024', 'Q025', 'Q026', 'Q047'])
 
 	# Utilizando Estatística Descritiva
 
@@ -116,8 +116,11 @@ def ft_importance(k=50):
 	# Apply SelectKBest class to extract top 10 best features
 
 	bestfeatures = SelectKBest(score_func=f_regression, k=k)
+
 	fit = bestfeatures.fit(df_train,label)
+	
 	dfscores = pd.DataFrame(fit.scores_)
+	
 	dfcolumns = pd.DataFrame(df_train.columns)
 
 	# Concat two dataframes for better visualization 
@@ -128,7 +131,12 @@ def ft_importance(k=50):
 
 	featureScores.columns = ['Specs','Score']
 
-	return featureScores.nlargest(78,'Score')
+	return featureScores.nlargest(k,'Score')
 
 if __name__=='__main__':
 	
+	df = ft_importance(k=87)
+
+	df.loc[df['Score']>10.268998]
+
+	features = df['Specs'].tolist()[:70]
