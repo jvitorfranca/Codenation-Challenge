@@ -11,6 +11,8 @@ from utilities import process_data
 from utilities import convert_to_zero
 from utilities import ft_importance
 
+from scipy import stats
+
 def main(time, df_train, label, df_test, df_answer):
 
 	classifier = asc.AutoSklearnRegressor(
@@ -85,18 +87,55 @@ if __name__ == "__main__":
 
 	df_train, df_test, df_answer = process_data(df_train, df_test, df_answer)
 
+	# main(60*60+60*30, df_train, label, df_test, df_answer)
+
+	z = np.abs(stats.zscore(df_train))
+
+	nan_values_index = np.isnan(z)
+
+	z[nan_values_index] = 0
+
+	df_train = df_train[(z < 10).all(axis=1)]
+
+	print(df_train.shape)
+
 	label = df_train['NU_NOTA_MT']
 
 	df_train.drop(['NU_NOTA_MT'], axis=1, inplace=True)
 
-	df = ft_importance(k=87)
+	model = RandomForestRegressor(bootstrap=True, criterion='mse', max_depth=10,
+                                  max_features='auto', max_leaf_nodes=None,
+                                  min_impurity_decrease=0.0, min_impurity_split=None,
+                                  min_samples_leaf=4, min_samples_split=5,
+                                  min_weight_fraction_leaf=0.0, n_estimators=200, n_jobs=-2,
+                                  oob_score=False, random_state=None, verbose=0, warm_start=False)
 
-	features = df['Specs'].tolist()[:50]
+	model.fit(df_train, label)
 
-	df_train = df_train[features]
+	predictions = model.predict(df_test)
 
-	df_test = df_test[features]
+	df_answer['NU_NOTA_MT'] = np.around(predictions, 2)
 
-	main(60*60+60*30, df_train, label, df_test, df_answer)
+	df_answer.to_csv('zscore10_sem_stats_answer.csv', index=False, header=True)
 
-	data = convert_to_zero('automl_answer')
+	'''
+
+	Sem notas estatística nas notas comp = 93.74%
+	Sem estatística = 93.75%
+	ZScore z < 8 = 93.72%
+	ZScore z < 5 = 93.7%
+	Estatística nas competências = 93.73%
+	Com todas as variáveis estatísticas = 93.75% (Ué??)
+	ZScore z < 5 com todas as características = 93.68%
+
+	'''
+
+	# data = convert_to_zero('zscore_sem_notas_comp_answer')
+
+	# df = ft_importance(k=87)
+
+	# features = df['Specs'].tolist()[:60]
+
+	# df_train = df_train[features]
+
+	# df_test = df_test[features]
