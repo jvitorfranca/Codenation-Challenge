@@ -18,6 +18,9 @@
 -   [ ] Verificar se é possível usar o xgboost como regressor [P]
 -   [ ] Estimar parametros para os regressores mais relevantes
 -   [ ] Normalizar os dados antes de enviar para o regressor [P]
+-   [ ] Realizar teste com DNN
+-   [ ] Estudar métodos para eliminação de outliers
+-   [ ] Estudar métodos de Scale
 
 
 <a id="orgf288669"></a>
@@ -39,6 +42,6 @@
 
 ## Regressores mais relevantes
 
-1.  Random Forest
-2.  ??
+1.  XGBoost
+2.  Random Forest
 3.  ??
