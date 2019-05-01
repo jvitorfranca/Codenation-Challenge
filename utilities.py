@@ -5,6 +5,15 @@ from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import f_regression
 
 
+def timer(start_time=None):
+    if not start_time:
+        start_time = datetime.now()
+        return start_time
+    elif start_time:
+        thour, temp_sec = divmod((datetime.now() - start_time).total_seconds(), 3600)
+        tmin, tsec = divmod(temp_sec, 60)
+        print('\n Time taken: %i hours %i minutes and %s seconds.' % (thour, tmin, round(tsec, 2)))
+
 def process_data(df_train, df_test, df_answer):
 
 	features = list(df_test)
@@ -66,7 +75,7 @@ def process_data(df_train, df_test, df_answer):
 	# Utilizando Estatística Descritiva
 
 	notas = ['NU_NOTA_CN', 'NU_NOTA_CH', 'NU_NOTA_LC', 'NU_NOTA_REDACAO']
-	
+
 	df_train['KURTOSIS_NOTAS'] = df_train[notas].kurtosis(axis=1)
 	df_train['MEAN_NOTAS'] = df_train[notas].mean(axis=1)
 	df_train['MEDIAN_NOTAS'] = df_train[notas].median(axis=1)
@@ -77,14 +86,14 @@ def process_data(df_train, df_test, df_answer):
 	df_train['STD_NOTAS'] = df_train[notas].std(axis=1)
 	df_train['VAR_NOTAS'] = df_train[notas].var(axis=1)
 	df_train['AMP_NOTAS'] = df_train[notas].max(axis=1) - df_train[notas].min(axis=1)
-	
+
 	df_train['MEAN_NOTA_CH_LC'] = df_train[['NU_NOTA_CH', 'NU_NOTA_LC']].mean(axis=1)
 	df_train['MEAN_NOTA_CH_CN'] = df_train[['NU_NOTA_CH', 'NU_NOTA_CN']].mean(axis=1)
 	df_train['MEAN_NOTA_CH_REDACAO'] = df_train[['NU_NOTA_CH', 'NU_NOTA_REDACAO']].mean(axis=1)
 	df_train['MEAN_NOTA_CN_LC'] = df_train[['NU_NOTA_CN', 'NU_NOTA_LC']].mean(axis=1)
 	df_train['MEAN_NOTA_CN_REDACAO'] = df_train[['NU_NOTA_CN', 'NU_NOTA_REDACAO']].mean(axis=1)
 	df_train['MEAN_NOTA_LC_REDACAO'] = df_train[['NU_NOTA_LC', 'NU_NOTA_REDACAO']].mean(axis=1)
-	
+
 	notas_red = ['NU_NOTA_COMP1', 'NU_NOTA_COMP2', 'NU_NOTA_COMP3', 'NU_NOTA_COMP4', 'NU_NOTA_COMP5']
 
 	df_train['KURTOSIS_NOTAS_COMP'] = df_train[notas_red].kurtosis(axis=1)
@@ -107,7 +116,7 @@ def process_data(df_train, df_test, df_answer):
 	df_train['MEAN_NOTA_COMP3_COMP4'] = df_train[['NU_NOTA_COMP3', 'NU_NOTA_COMP4']].mean(axis=1)
 	df_train['MEAN_NOTA_COMP3_COMP5'] = df_train[['NU_NOTA_COMP3', 'NU_NOTA_COMP5']].mean(axis=1)
 	df_train['MEAN_NOTA_COMP4_COMP5'] = df_train[['NU_NOTA_COMP4', 'NU_NOTA_COMP5']].mean(axis=1)
-	
+
 	df_test['KURTOSIS_NOTAS'] = df_test[notas].kurtosis(axis=1)
 	df_test['MEAN_NOTAS'] = df_test[notas].mean(axis=1)
 	df_test['MEDIAN_NOTAS'] = df_test[notas].median(axis=1)
@@ -118,14 +127,14 @@ def process_data(df_train, df_test, df_answer):
 	df_test['STD_NOTAS'] = df_test[notas].std(axis=1)
 	df_test['VAR_NOTAS'] = df_test[notas].var(axis=1)
 	df_test['AMP_NOTAS'] = df_test[notas].max(axis=1) - df_test[notas].min(axis=1)
-	
+
 	df_test['MEAN_NOTA_CH_LC'] = df_test[['NU_NOTA_CH', 'NU_NOTA_LC']].mean(axis=1)
 	df_test['MEAN_NOTA_CH_CN'] = df_test[['NU_NOTA_CH', 'NU_NOTA_CN']].mean(axis=1)
 	df_test['MEAN_NOTA_CH_REDACAO'] = df_test[['NU_NOTA_CH', 'NU_NOTA_REDACAO']].mean(axis=1)
 	df_test['MEAN_NOTA_CN_LC'] = df_test[['NU_NOTA_CN', 'NU_NOTA_LC']].mean(axis=1)
 	df_test['MEAN_NOTA_CN_REDACAO'] = df_test[['NU_NOTA_CN', 'NU_NOTA_REDACAO']].mean(axis=1)
 	df_test['MEAN_NOTA_LC_REDACAO'] = df_test[['NU_NOTA_LC', 'NU_NOTA_REDACAO']].mean(axis=1)
-	
+
 	df_test['KURTOSIS_NOTAS_COMP'] = df_test[notas_red].kurtosis(axis=1)
 	df_test['MEAN_NOTAS_COMP'] = df_test[notas_red].mean(axis=1)
 	df_test['MEDIAN_NOTAS_COMP'] = df_test[notas_red].median(axis=1)
@@ -159,8 +168,6 @@ def convert_to_zero(filename):
 
 	data.to_csv('answer.csv', index=False, header=True)
 
-	return data
-
 def ft_importance(k=50):
 
 	df_train = pd.read_csv('data/train.csv')
@@ -178,12 +185,12 @@ def ft_importance(k=50):
 	bestfeatures = SelectKBest(score_func=f_regression, k=k)
 
 	fit = bestfeatures.fit(df_train,label)
-	
+
 	dfscores = pd.DataFrame(fit.scores_)
-	
+
 	dfcolumns = pd.DataFrame(df_train.columns)
 
-	# Concat two dataframes for better visualization 
+	# Concat two dataframes for better visualization
 
 	featureScores = pd.concat([dfcolumns,dfscores],axis=1)
 
@@ -194,7 +201,7 @@ def ft_importance(k=50):
 	return featureScores.nlargest(k,'Score')
 
 if __name__=='__main__':
-	
+
 	df = ft_importance(k=78+35)
 
 	print(df)
