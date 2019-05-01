@@ -1,0 +1,7 @@
+auto-sklearn
+numpy
+pandas
+pickleshare
+scikit-learn
+TPOT
+xgboost

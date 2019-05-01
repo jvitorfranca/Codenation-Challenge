@@ -8,34 +8,39 @@
 
 <a id="org95876d3"></a>
 
-## Metas <code>[1/7]</code>
+## Metas <code>[9/13]</code>
 
 -   [X] Rodar com o autosklearn
--   [ ] Usar apenas características selecionadas pelo KBest
+-   [X] Usar apenas características selecionadas pelo KBest
+-   [X] Gerar novas características [P] [V]
+-   [X] Verificar se é possível usar o xgboost como regressor [P]
+-   [X] Estimar parametros para os regressores mais relevantes
+-   [X] Normalizar os dados antes de enviar para o regressor [P]
+-   [X] Realizar teste com DNN
+-   [X] Estudar métodos para eliminação de outliers
+-   [X] Estudar métodos de Scale
 -   [ ] Analisar individuos de alta precisão e baixa precisão no acerto com o Lime
+-	[ ] Análise dos indivíduos utilizando ELI5
 -   [ ] Analisar o gráfico da regressão
--   [ ] Gerar novas características [P] [V]
--   [ ] Verificar se é possível usar o xgboost como regressor [P]
--   [ ] Estimar parametros para os regressores mais relevantes
--   [ ] Normalizar os dados antes de enviar para o regressor [P]
--   [ ] Realizar teste com DNN
--   [ ] Estudar métodos para eliminação de outliers
--   [ ] Estudar métodos de Scale
-
+-	[ ] Rodar com o autosklearn utilizando os melhores regressores
+-	[ ] Rodar com TPOT
 
 <a id="orgf288669"></a>
 
-## Análises estatísticas que podem ser relevantes <code>[44%]</code>
+## Análises estatísticas que podem ser relevantes <code>[90%]</code>
 
--   [ ] Skew
+-   [X] Skew
 -   [X] Kurtosis
--   [X] Quartile
+-   [X] Quantile
 -   [X] Median
 -   [X] Mean
--   [ ] Max
--   [ ] Min
+-   [X] Mode
+-	[X] Mean Absolute Deviation
+-	[X] Standard Error of the Mean
+-	[X] Standard Deviation
+-	[X] Variance
+-	[X] Amplitute
 -   [ ] Count
--   [ ] Mode
 
 
 <a id="orga8d0d44"></a>
@@ -44,4 +49,4 @@
 
 1.  XGBoost
 2.  Random Forest
-3.  ??
+3.  ExtraTrees
