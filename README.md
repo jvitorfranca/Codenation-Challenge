@@ -19,11 +19,11 @@
 -   [X] Realizar teste com DNN
 -   [X] Estudar métodos para eliminação de outliers
 -   [X] Estudar métodos de Scale
--   [ ] Analisar individuos de alta precisão e baixa precisão no acerto com o Lime
--	[ ] Análise dos indivíduos utilizando ELI5
--   [ ] Analisar o gráfico da regressão
--	[ ] Rodar com o autosklearn utilizando os melhores regressores
--	[ ] Rodar com TPOT
+-   [X] Analisar individuos de alta precisão e baixa precisão no acerto com o Lime
+-	[X] Análise dos indivíduos utilizando ELI5
+-   [X] Analisar o gráfico da regressão
+-	[X] Rodar com o autosklearn utilizando os melhores regressores
+-	[X] Rodar com TPOT
 
 <a id="orgf288669"></a>
 
@@ -40,7 +40,7 @@
 -	[X] Standard Deviation
 -	[X] Variance
 -	[X] Amplitute
--   [ ] Count
+-   [X] Count
 
 
 <a id="orga8d0d44"></a>
